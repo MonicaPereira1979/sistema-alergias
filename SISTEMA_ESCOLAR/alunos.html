@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Alunos - Sistema</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app-shell d-flex">
+    <nav class="sidebar bg-white border-end">
+      <div class="sidebar-header p-3">
+        <h5 class="m-0">Alérgias Escolares</h5>
+      </div>
+      <ul class="nav flex-column p-2">
+        <!--<li class="nav-item"><a class="nav-link" href="/dashboard.html"><i class="bi bi-house" id="adminTab"></i> Dashboard</a></li>-->
+        <li class="nav-item"><a class="nav-link active" href="/home.html"><i class="bi bi-house-door"></i> Início</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/alunos.html"><i class="bi bi-people"></i> Alunos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/notificacoes.html"><i class="bi bi-bell"></i> Notificações</a></li>
+      <li class="nav-item"><a class="nav-link" href="/aluno_historico.html"><i class="bi bi-journal-text"></i> Histórico (rápido)</a></li>
+      <button class="btn btn-outline-danger" id="btnLogout">Sair do sistema</button>
+      </ul>
+    </nav>
+
+    <main class="main-content flex-fill p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Alunos</h4>
+        <div id="userInfo"></div>
+      </div>
+
+      <!-- filtros -->
+      <div class="row g-2 mb-3">
+        <div class="col-md-4">
+          <input id="filtroNome" class="form-control" placeholder="Buscar por nome">
+        </div>
+        <div class="col-md-3">
+          <select id="filtroTurma" class="form-select">
+            <option value="">Todas as turmas</option>
+            <option>A</option><option>B</option><option>C</option><option>D</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select id="filtroGravidade" class="form-select">
+            <option value="">Todas as gravidades</option>
+            <option>Leve</option><option>Moderada</option><option>Grave</option>
+          </select>
+        </div>
+        <div class="col-md-2 d-grid">
+          <button id="btnFiltroLimpar" class="btn btn-outline-secondary">Limpar</button>
+        </div>
+      </div>
+
+      <div id="listaAlunos" class="mb-4"></div>
+
+      <!-- form: apenas visível para Responsável/Admin -->
+      <div id="formArea" class="card p-3">
+        <h5>Cadastro de Aluno</h5>
+        <form id="formAluno" class="row g-2">
+          <div class="col-md-6">
+            <label class="form-label small">Nome do Aluno</label>
+            <input id="nome" class="form-control" placeholder="Nome do aluno" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label small">Idade</label>
+            <input id="idade" type="number" class="form-control" placeholder="Idade">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small">Turma</label>
+            <select id="turma" class="form-select">
+              <option>A</option><option>B</option><option>C</option><option>D</option>
+            </select>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label small">Tipo de Alergia</label>
+            <input id="alergias" class="form-control" placeholder="Ex: Leite, Amendoim" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small">Gravidade</label>
+            <select id="gravidade" class="form-select">
+              <option>Leve</option><option>Moderada</option><option>Grave</option>
+            </select>
+          </div>
+
+          <div class="col-12"><hr></div>
+          <div class="col-md-6">
+            <label class="form-label small">Nome do Responsável</label>
+            <input id="respNome" class="form-control" placeholder="Nome do responsável" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small">CPF do Responsável</label>
+            <input id="respCPF" class="form-control" placeholder="000.000.000-00" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small">E-mail do Responsável</label>
+            <input id="respEmail" type="email" class="form-control" placeholder="email@exemplo.com" required>
+          </div>
+
+          <div class="col-12 d-grid mt-2">
+            <button class="btn btn-success" type="submit">Salvar aluno</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="mt-3">
+       <a href="/home.html" class="btn btn-link">Voltar</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal editar aluno -->
+  <div class="modal fade" id="modalEditarAluno" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form id="formEditarAluno">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar Aluno</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="editId">
+            <div class="row g-2">
+              <div class="col-md-6">
+                <label class="form-label small">Nome do Aluno</label>
+                <input id="editNome" class="form-control" required>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label small">Idade</label>
+                <input id="editIdade" type="number" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label small">Turma</label>
+                <select id="editTurma" class="form-select">
+                  <option>A</option><option>B</option><option>C</option><option>D</option>
+                </select>
+              </div>
+              <div class="col-md-8">
+                <label class="form-label small">Tipo de Alergia</label>
+                <input id="editAlergia" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label small">Gravidade</label>
+                <select id="editGravidade" class="form-select">
+                  <option>Leve</option><option>Moderada</option><option>Grave</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Nome do Responsável</label>
+                <input id="editRespNome" class="form-control" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small">CPF do Responsável</label>
+                <input id="editRespCPF" class="form-control" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small">E-mail do Responsável</label>
+                <input id="editRespEmail" type="email" class="form-control" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
+            <button class="btn btn-primary" type="submit">Salvar alterações</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/alunos.js"></script>
+</body>
+</html>

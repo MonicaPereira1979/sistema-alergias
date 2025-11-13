@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Início - Sistema de Alergias Escolares</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+   <!-- Scripts Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    body {
+      background-color: #f8fafc;
+    }
+    .welcome-card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .welcome-card h2 {
+      color: #333;
+      font-size: 1.6rem;
+    }
+    .welcome-card p {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell d-flex">
+    <!-- Sidebar -->
+    <nav class="sidebar bg-white border-end">
+      <div class="sidebar-header p-3">
+        <h5 class="m-0">Alérgias Escolares</h5>
+      </div>
+      <ul class="nav flex-column p-2">
+        <li class="nav-item"><a class="nav-link active" href="/home.html"><i class="bi bi-house-door"></i> Início</a></li>
+        <li class="nav-item" id="adminTab"><a class="nav-link" href="/dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/alunos.html"><i class="bi bi-people"></i> Alunos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/notificacoes.html"><i class="bi bi-bell"></i> Notificações</a></li>
+        <li class="nav-item"><a class="nav-link" href="/aluno_historico.html"><i class="bi bi-journal-text"></i> Histórico</a></li>
+
+        <button class="btn btn-outline-danger mt-3" id="btnLogout">Sair do sistema</button>
+      </ul>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content flex-fill p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4>Início</h4>
+        <div id="userInfo" class="text-end"></div>
+      </div>
+
+      <div class="welcome-card mx-auto mt-4" style="max-width: 700px;">
+        <i class="bi bi-heart-pulse text-danger" style="font-size: 2rem;"></i>
+        <h2 class="mt-3">Bem-vindo(a), <span id="nomeUsuario"></span>!</h2>
+        <p class="mt-3">
+          Este é o <strong>Sistema de Controle de Alergias Escolares</strong>.<br>
+          Acompanhe os registros dos alunos, notificações e histórico de alergias em um só lugar.
+        </p>
+
+        <div class="alert alert-info mt-3">
+          <i class="bi bi-info-circle"></i> Novidade: agora é possível vincular responsáveis diretamente ao cadastro de alunos!
+        </div>
+
+        <div class="d-grid mt-4 gap-2">
+          <a href="/alunos.html" class="btn btn-primary"><i class="bi bi-people"></i> Ir para Alunos</a>
+          <a href="/notificacoes.html" class="btn btn-outline-secondary"><i class="bi bi-bell"></i> Ver Notificações</a>
+        </div>
+      </div>
+            <!-- Seção de Notícias -->
+      <div class="mt-5 text-center">
+        <h5 class="fw-semibold mb-3">
+          <i class="bi bi-newspaper text-primary"></i> Últimas Notícias e Comunicados
+        </h5>
+        <p class="text-muted mb-4">Fique por dentro das novidades e informações importantes do sistema escolar.</p>
+      </div>
+
+      <!-- Carrossel de Notícias -->
+      <div id="carouselNoticias" class="carousel slide mx-auto" data-bs-ride="carousel" data-bs-interval="4000" style="max-width: 900px;">
+        <div class="carousel-inner">
+
+          <div class="carousel-item active">
+            <div class="card shadow-sm border-0">
+              <div class="card-body text-center p-4">
+                <i class="bi bi-megaphone text-primary" style="font-size: 2rem;"></i>
+                <h5 class="card-title mt-3">Semana da Conscientização Alimentar</h5>
+                <p class="card-text">Atividades e palestras sobre alimentação saudável e prevenção de alergias acontecerão nesta semana. Participe!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card shadow-sm border-0">
+              <div class="card-body text-center p-4">
+                <i class="bi bi-calendar-event text-success" style="font-size: 2rem;"></i>
+                <h5 class="card-title mt-3">Atualização de Cadastros</h5>
+                <p class="card-text">Os responsáveis podem revisar as informações dos alunos até o final do mês.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card shadow-sm border-0">
+              <div class="card-body text-center p-4">
+                <i class="bi bi-info-circle text-danger" style="font-size: 2rem;"></i>
+                <h5 class="card-title mt-3">Comunicado Importante</h5>
+                <p class="card-text">Em casos de emergência alérgica, acione imediatamente a equipe responsável e siga o protocolo da escola.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Controles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticias" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticias" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Próximo</span>
+        </button>
+      </div>
+
+    </main>
+    
+  </div>
+
+  <script>
+    // Recupera sessão
+    const sessao = JSON.parse(localStorage.getItem("sca_session"));
+
+    // Redireciona se não estiver logado
+    if (!sessao) {
+      window.location.href = "login.html";
+    }
+
+    // Mostra o nome
+    document.getElementById("nomeUsuario").innerText = sessao.name || "Usuário";
+
+    // Exibe informações do usuário no topo
+    document.getElementById("userInfo").innerHTML = `
+      <small><strong>${sessao.name}</strong><br>${sessao.email}</small>
+    `;
+
+    // Esconde o Dashboard se não for Admin
+    if (sessao.role !== "Admin") {
+      const adminTab = document.getElementById("adminTab");
+      if (adminTab) adminTab.style.display = "none";
+    }
+
+    // Logout
+    document.getElementById("btnLogout").addEventListener("click", () => {
+      localStorage.removeItem("sca_session");
+      window.location.href = "index.html";
+    });
+  </script>
+   
+
+</body>
+</html>
