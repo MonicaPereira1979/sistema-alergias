@@ -8,7 +8,7 @@
   function getNotifs(){ return JSON.parse(localStorage.getItem(KEY_NOTIF) || "[]"); }
 
   const sess = JSON.parse(localStorage.getItem(KEY_SESSION) || "null");
-  if(!sess){ location.href = "/index.html"; return; }
+  if(!sess){ location.href = "index.html"; return; }
   document.getElementById("userInfo").innerText = `${sess.name} (${sess.role})`;
   
 // Pega a sessão do usuário
@@ -22,7 +22,7 @@ if (!scaSession || scaSession.role !== "Admin") {
 
     // Bloqueia acesso ao conteúdo do dashboard
     alert("Acesso negado. Apenas administradores podem ver o dashboard.");
-    window.location.href = "/alunos.html"; // opcional: redireciona
+    window.location.href = "alunos.html"; // opcional: redireciona
 }
   // Chart instance
   let chart = null;
