@@ -6,7 +6,7 @@
   const KEY_USERS = "sca_users";
 
   const sess = JSON.parse(localStorage.getItem(KEY_SESSION) || "null");
-  if(!sess){ location.href = "/index.html"; return; }
+  if(!sess){ location.href = "index.html"; return; }
   document.getElementById("userInfo").innerText = `${sess.name} (${sess.role})`;
 
 
@@ -39,7 +39,7 @@
 
     listaEl.innerHTML = alunos.map(a=>{
       const r = a.responsavel || {};
-      let actions = `<a class="btn btn-sm btn-outline-secondary me-1" href="/aluno_historico.html?id=${a.id}">Histórico</a>`;
+      let actions = `<a class="btn btn-sm btn-outline-secondary me-1" href="aluno_historico.html?id=${a.id}">Histórico</a>`;
       if((sess.role==="Responsavel" && r.email===sess.email) || sess.role==="Admin"){
         actions += `<button class="btn btn-sm btn-outline-primary me-1" data-action="edit" data-id="${a.id}">Editar</button>`;
         actions += `<button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="${a.id}">Excluir</button>`;
