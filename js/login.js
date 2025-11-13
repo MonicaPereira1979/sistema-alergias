@@ -62,7 +62,7 @@
     // salva sessão
     const session = { name: user.name, email: user.email, role: user.role, cpf: user.cpf || "" };
     localStorage.setItem(KEY_SESSION, JSON.stringify(session));
-    location.href = "/home.html";
+    location.href = "home.html";
   });
 
 })();
