@@ -22,7 +22,7 @@
   const btnLogout = document.getElementById("btnLogoutHHist");
   if(btnLogout){
     btnLogout.addEventListener("click", ()=>{
-      location.href = "/home.html";
+      location.href = "home.html";
     });
   }
 
@@ -226,3 +226,4 @@ historyList.innerHTML = h.slice().reverse().map((it, index)=>`
   window.__historico_currentAlunoId = () => currentAlunoId;
 
 })();
+
